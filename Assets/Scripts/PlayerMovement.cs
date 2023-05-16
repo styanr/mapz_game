@@ -38,6 +38,6 @@ public class PlayerMovement : MonoBehaviour
     void Move()
     {
         rb.velocity = new Vector2(direction.x * MoveSpeed, direction.y * MoveSpeed);
-        Debug.Log(rb.velocity.x + " " + rb.velocity.y);
+        //Debug.Log(rb.velocity.x + " " + rb.velocity.y);
     }
 }

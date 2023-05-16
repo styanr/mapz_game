@@ -177,7 +177,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 8.34
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -340,7 +340,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -2238,6 +2238,7 @@ GameObject:
   - component: {fileID: 1899460082}
   - component: {fileID: 1899460088}
   - component: {fileID: 1899460087}
+  - component: {fileID: 1899460089}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2276,14 +2277,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.76, y: 1.2}
+    oldSize: {x: 1.1875, y: 1.875}
     newSize: {x: 0.76, y: 1.2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.76, y: 1.2}
+  m_Size: {x: 1.1875, y: 1.875}
   m_EdgeRadius: 0
 --- !u!50 &1899460084
 Rigidbody2D:
@@ -2344,8 +2345,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1058103003
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 422662670, guid: e88736e708dce7840aece89a3f772431, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2406,3 +2407,91 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ce536278a6122248af82767fadfe4d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1899460089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899460081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31aef5cb0841c784e8665434dec0a5ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1945695447
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1945695448}
+  - component: {fileID: 1945695450}
+  - component: {fileID: 1945695451}
+  - component: {fileID: 1945695452}
+  m_Layer: 0
+  m_Name: EnemySpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1945695448
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945695447}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.7361946, y: -1.9647218, z: -0.14885747}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1945695450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945695447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49170fef310db404abc0f47d69b5791c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyFactories:
+  - {fileID: 1945695452}
+  - {fileID: 1945695451}
+  _spawnDelay: 1
+--- !u!114 &1945695451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945695447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e98984bf8fa79d4fbe154922f924145, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _orcPrefab: {fileID: 3050173749828658772, guid: 203f1dd55dc791c42a8336df921cb389, type: 3}
+--- !u!114 &1945695452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945695447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c09df4b03660004fa513c4edad013cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skellyPrefab: {fileID: 0}
