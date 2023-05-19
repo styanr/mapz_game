@@ -24,6 +24,7 @@ public class EnemySpawner : MonoBehaviour
             var _enemyFactory = _enemyFactories[Random.Range(0, _enemyFactories.Length)]; 
             Enemy enemy = _enemyFactory.CreateEnemy();
             enemy.transform.position = GetSpawnPosition();
+            enemy.transform.parent = transform;
         }
     }
     

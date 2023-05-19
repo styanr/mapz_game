@@ -7,6 +7,8 @@ public class Orc : Enemy
     // Start is called before the first frame update
     private void Awake()
     {
-        MoveSpeed = 3f;
+        _moveSpeed = 4;
+        _health = 50;
+        _damage = 5; 
     }
 }
