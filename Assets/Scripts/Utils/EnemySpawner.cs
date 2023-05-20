@@ -9,6 +9,7 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private EnemyFactory[] _enemyFactories;
     [SerializeField] private float _spawnDelay = 1f;
+    [SerializeField] private float _warriorSpawnChance = 0.1f;
     private Camera _mainCamera;
     private float _spawnTimer = 0f;
     private void Awake()
@@ -21,8 +22,9 @@ public class EnemySpawner : MonoBehaviour
         if (_spawnTimer >= _spawnDelay)
         {
             _spawnTimer = 0f;
-            var _enemyFactory = _enemyFactories[Random.Range(0, _enemyFactories.Length)]; 
-            Enemy enemy = _enemyFactory.CreateEnemy();
+            var isWarrior = Random.Range(0.0f, 1.0f) < _warriorSpawnChance;
+            var _enemyFactory = _enemyFactories[Random.Range(0, _enemyFactories.Length)];
+            Enemy enemy =  isWarrior ? _enemyFactory.CreateWarriorEnemy() : _enemyFactory.CreateEnemy();
             enemy.transform.position = GetSpawnPosition();
             enemy.transform.parent = transform;
         }

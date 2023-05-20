@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1567359368042709417}
   - component: {fileID: 5677169186223671074}
   m_Layer: 0
-  m_Name: Arrow
+  m_Name: ArrowSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,9 +93,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2321318718902985742}
-  - component: {fileID: 1754909042125840088}
+  - component: {fileID: 5444101882698395141}
   m_Layer: 0
-  m_Name: Projectile
+  m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,7 +117,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1754909042125840088
+--- !u!114 &5444101882698395141
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,7 +126,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7921550261446140855}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64b4941c6ec37fe4680839003bcfa884, type: 3}
+  m_Script: {fileID: 11500000, guid: 76c302e2f556d264c9bc858fc473722f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 15

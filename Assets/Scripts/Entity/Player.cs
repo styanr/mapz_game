@@ -40,7 +40,6 @@ public class Player : Entity
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Player");
         if (Input.GetMouseButtonDown(0))
         {
             Attack();

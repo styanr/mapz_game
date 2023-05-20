@@ -7,7 +7,7 @@ public class Skelly : Enemy
     private void Awake()
     {
         _moveSpeed = 4;
-        _health = 20;
+        _health = 15;
         _damage = 3; 
     }
 }
