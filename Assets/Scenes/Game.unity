@@ -65482,7 +65482,8 @@ MonoBehaviour:
   _enemyFactories:
   - {fileID: 1945695452}
   - {fileID: 1945695451}
-  _spawnDelay: 0.76
+  _spawnDelay: 0.9
+  _warriorSpawnChance: 0.1
 --- !u!114 &1945695451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65496,6 +65497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _orcPrefab: {fileID: 3050173749828658772, guid: 203f1dd55dc791c42a8336df921cb389, type: 3}
+  _orcWarriorPrefab: {fileID: 3788400015788097515, guid: 1fcd219baa6839945bcceed131c8e38e, type: 3}
 --- !u!114 &1945695452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65509,3 +65511,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skellyPrefab: {fileID: 2382638166821197622, guid: 1383929da6ced3b4fb47fa3dc234b9c7, type: 3}
+  _skellyWarriorPrefab: {fileID: -8701741113427627509, guid: 6e14fcd3f5a689442a6d79b37557cb97, type: 3}

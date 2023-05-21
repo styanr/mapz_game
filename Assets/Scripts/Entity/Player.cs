@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : Entity
 {
+    public float _fireRate;
+    private float timer;
     public Projectile projectile;
     // Start is called before the first frame update
     private void Awake()
@@ -27,6 +29,18 @@ public class Player : Entity
         Instantiate(projectile, transform.position, Quaternion.identity);
     }
     
+    public void HandleInput()
+    {
+        timer += Time.deltaTime;
+        if (Input.GetMouseButton(0))
+        {
+            if(timer >= _fireRate) {
+                Attack();
+                timer = 0;
+            }
+        }
+    }
+    
     public override void TakeDamage(int damage)
     {
         throw new System.NotImplementedException();
@@ -40,9 +54,6 @@ public class Player : Entity
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Attack();
-        }
+        HandleInput();
     }
 }
