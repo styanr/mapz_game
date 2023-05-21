@@ -5,8 +5,7 @@ using UnityEngine;
 
 public abstract class Enemy : Entity
 {
-    private Transform player;
-    
+    protected Transform player;
     private SpriteRenderer _spriteRenderer;
     
     private void Start()
@@ -41,7 +40,7 @@ public abstract class Enemy : Entity
         Destroy(gameObject);
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    protected virtual void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject == PlayerSingleton.Instance.gameObject)
         {
