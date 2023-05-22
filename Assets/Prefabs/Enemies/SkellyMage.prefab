@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4275724543594711961}
   - component: {fileID: 2753015577010988420}
   - component: {fileID: -2936682437493036551}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SkellyMage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1058103003
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 128856626, guid: 7de248bee585aad48802d3410dcc88fe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -168,4 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a665958a863d7044fadaa08a986e4796, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _safeDistance: 7
+  _circleSpeed: 1
+  _safeRadius: 7
+  _projectile: {fileID: 1780998699793130760, guid: 08b5c9a47f237a8469ad6e17885cc21a, type: 3}
+  _fireRate: 5

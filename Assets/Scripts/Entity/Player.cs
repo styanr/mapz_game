@@ -25,7 +25,6 @@ public class Player : Entity
     
     public override void Attack()
     {
-        Debug.Log("Attack");
         Instantiate(projectile, transform.position, Quaternion.identity);
     }
     

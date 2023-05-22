@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2753015577010988420}
   m_Layer: 0
   m_Name: Skelly
-  m_TagString: Untagged
+  m_TagString: Skelly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

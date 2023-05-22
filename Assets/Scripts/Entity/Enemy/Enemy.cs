@@ -7,14 +7,18 @@ public abstract class Enemy : Entity
 {
     protected Transform player;
     private SpriteRenderer _spriteRenderer;
-    
+    private Rigidbody2D _rigidbody2D;
     private void Start()
     {
+        _rigidbody2D = GetComponent<Rigidbody2D>();
+        _rigidbody2D.drag = 5f;
+        _rigidbody2D.angularDrag = 5f;
+        
         _spriteRenderer = GetComponent<SpriteRenderer>();
         player = PlayerSingleton.Instance.transform;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         Move();
         Flip();
