@@ -3,18 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSingleton : MonoBehaviour
+public class PlayerSingleton : Singleton<PlayerSingleton>
 {
-    public static PlayerSingleton Instance { get; private set; }
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+    
 }

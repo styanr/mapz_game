@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using Vector2 = System.Numerics.Vector2;
 
 [System.Serializable]
 public class EnemySpawnChance
@@ -11,33 +10,34 @@ public class EnemySpawnChance
     public EnemyType EnemyType;
     public float SpawnChance;
 }
+
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private EnemyFactory[] _enemyFactories;
     [SerializeField] private float _spawnDelay = 1f;
     [SerializeField] private EnemySpawnChance[] _enemySpawnChances;
-    private int _currentEnemies;
-
+    [SerializeField] Timer _spawnTimer;
     private Camera _mainCamera;
-    private float _spawnTimer = 0f;
+    
     private void Awake()
     {
         _mainCamera = Camera.main;
+        _spawnTimer.SetTimer(_spawnDelay);
     }
     private void Update()
     {
-        _spawnTimer += Time.deltaTime;
-        if (_spawnTimer >= _spawnDelay)
+        if (_spawnTimer.IsReady())
         {
-            _spawnTimer = 0f;
-            var enemyFactory = _enemyFactories[Random.Range(0, _enemyFactories.Length)];
-            float random = Random.Range(0f, 1f);
+            var enemyFactory = GetRandomEnemyFactory();
             Enemy enemy = enemyFactory.CreateEnemy(GetRandomEnemyType());
             enemy.transform.position = GetSpawnPosition();
             enemy.transform.parent = transform;
         }
     }
-
+    private EnemyFactory GetRandomEnemyFactory()
+    {
+        return _enemyFactories[Random.Range(0, _enemyFactories.Length)];
+    }
     private EnemyType GetRandomEnemyType()
     {
         EnemyType enemyType = EnemyType.Default;

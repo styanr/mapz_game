@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Player : Entity
 {
-    public float _fireRate;
-    private float timer;
-    public Projectile projectile;
-    // Start is called before the first frame update
+    [SerializeField] private float _fireRate;
+    [SerializeField] private float timer;
+    [SerializeField] private Projectile projectile;
+    
     private void Awake()
     {
         _moveSpeed = 5;
@@ -26,6 +26,7 @@ public class Player : Entity
     public override void Attack()
     {
         Instantiate(projectile, transform.position, Quaternion.identity);
+        GameManager.Instance.ShootArrow();
     }
     
     public void HandleInput()

@@ -36,6 +36,11 @@ public abstract class Enemy : Entity
         if (_health <= 0)
         {
             Die();
+            GameManager.Instance.EnemyDeath();
+        }
+        else
+        {
+            GameManager.Instance.Hit();
         }
     }
 

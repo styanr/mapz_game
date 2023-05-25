@@ -40,7 +40,9 @@ public abstract class Projectile : MonoBehaviour
 
     protected virtual void CalculateDirection()
     {
+        _mousePosition.z = 0;
         _direction = (_mousePosition - transform.position).normalized;
+        Debug.Log(_direction.x + " " + _direction.y + " ");
     }
 
     protected virtual void SetRotation()

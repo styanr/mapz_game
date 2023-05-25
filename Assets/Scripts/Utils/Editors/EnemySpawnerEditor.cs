@@ -6,12 +6,14 @@ public class EnemySpawnerEditor : Editor
 {
     private SerializedProperty _enemyFactoriesProperty;
     private SerializedProperty _spawnDelayProperty;
+    private SerializedProperty _spawnTimerProperty;
     private SerializedProperty _enemySpawnChancesProperty;
 
     private void OnEnable()
     {
         _enemyFactoriesProperty = serializedObject.FindProperty("_enemyFactories");
         _spawnDelayProperty = serializedObject.FindProperty("_spawnDelay");
+        _spawnTimerProperty = serializedObject.FindProperty("_spawnTimer");
         _enemySpawnChancesProperty = serializedObject.FindProperty("_enemySpawnChances");
     }
 
@@ -21,6 +23,7 @@ public class EnemySpawnerEditor : Editor
 
         EditorGUILayout.PropertyField(_enemyFactoriesProperty, true);
         EditorGUILayout.PropertyField(_spawnDelayProperty);
+        EditorGUILayout.PropertyField(_spawnTimerProperty);
 
         EditorGUILayout.Space();
         EditorGUILayout.LabelField("Spawn Chances");
