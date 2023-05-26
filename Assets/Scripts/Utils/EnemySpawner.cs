@@ -51,11 +51,11 @@ public class EnemySpawner : MonoBehaviour
         }
         
         float random = Random.Range(0f, totalSpawnChance);
-        Debug.Log(random + " " + totalSpawnChance);
+        //Debug.Log(random + " " + totalSpawnChance);
         foreach (var enemySpawnChance in _enemySpawnChances)
         {
             currentSpawnChance += enemySpawnChance.SpawnChance;
-            Debug.Log(random + " " + currentSpawnChance + ": " + (random < currentSpawnChance));
+            //Debug.Log(random + " " + currentSpawnChance + ": " + (random < currentSpawnChance));
             if (random < currentSpawnChance)
             {
                 enemyType = enemySpawnChance.EnemyType;

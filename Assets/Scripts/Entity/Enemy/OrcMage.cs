@@ -14,11 +14,11 @@ public class OrcMage : Enemy
     }
     protected override void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject == PlayerSingleton.Instance.gameObject)
+        if (collision.gameObject == Player.Instance.gameObject)
         {
             Attack();
             var randAngle = Random.Range(0, 361);
-            transform.position = PlayerSingleton.Instance.transform.position + 
+            transform.position = Player.Instance.transform.position + 
                                  new Vector3(Mathf.Cos(randAngle), Mathf.Sin(randAngle), 0) * _teleportDistance;
         }
     }

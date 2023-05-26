@@ -9,7 +9,6 @@ public class MageBolt : Projectile
     void Start()
     {
         _moveSpeed = 20f;
-        damage = 0;
     }
 
     private GameObject FindNearestSkelly()

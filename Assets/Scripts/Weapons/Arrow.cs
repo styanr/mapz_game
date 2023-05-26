@@ -7,6 +7,5 @@ public class Arrow : Projectile
     void Start()
     {
         _moveSpeed = 30f;
-        damage = 15;
     }
 }

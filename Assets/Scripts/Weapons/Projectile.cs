@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 
 public abstract class Projectile : MonoBehaviour
@@ -11,10 +12,13 @@ public abstract class Projectile : MonoBehaviour
     protected float _lifetime = 3f;
     private float _timer = 0f;
     protected float _moveSpeed;
-    protected int damage;
-    
-    // Start is called before the first frame update
+    private IProjectileAbility _ability;
 
+    public void SetDecorator(IProjectileAbility ability)
+    {
+        _ability = ability;
+    }
+    
     private void Awake()
     {
         InitialiseProjectile();
@@ -42,7 +46,7 @@ public abstract class Projectile : MonoBehaviour
     {
         _mousePosition.z = 0;
         _direction = (_mousePosition - transform.position).normalized;
-        Debug.Log(_direction.x + " " + _direction.y + " ");
+        //Debug.Log(_direction.x + " " + _direction.y + " ");
     }
 
     protected virtual void SetRotation()
@@ -89,7 +93,7 @@ public abstract class Projectile : MonoBehaviour
 
     protected virtual bool ShouldHitObject(Collider2D collider)
     {
-        return collider.gameObject != gameObject && collider.gameObject != PlayerSingleton.Instance.gameObject;
+        return collider.gameObject != gameObject && collider.gameObject != Player.Instance.gameObject;
     }
 
     protected virtual void OnHit(Collider2D collider)
@@ -97,7 +101,7 @@ public abstract class Projectile : MonoBehaviour
         Enemy enemy = collider.gameObject.GetComponent<Enemy>();
         if (enemy != null)
         {
-            enemy.TakeDamage(damage);
+            _ability.Hit(enemy);
         }
 
         Destroy(gameObject);

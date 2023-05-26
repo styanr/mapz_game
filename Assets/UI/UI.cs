@@ -9,7 +9,7 @@ public class UI : MonoBehaviour
     VisualElement root;
     private Label ScoreLabel;
     private Label AmmoLabel;
-    private PlayerSingleton _playerSingleton;
+    private Player _playerSingleton;
 
     private void OnEnable()
     {

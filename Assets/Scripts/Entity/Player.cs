@@ -2,20 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Entity
+public class Player : Singleton<Player>, IEntity
 {
+    protected float _moveSpeed;
+    protected int _health;
+    protected int _damage;
+    private IProjectileAbility _projectileAbility;
+    
     [SerializeField] private float _fireRate;
     [SerializeField] private float timer;
     [SerializeField] private Projectile projectile;
     
-    private void Awake()
+    private void Start()
     {
         _moveSpeed = 5;
         _health = 100;
-        _damage = 10;       
+        _damage = 15;     
+        SetDecorator(0);
     }
-    
-    public override void Move()
+
+    public void SetDecorator(int ability)
+    {
+        switch (ability)
+        {
+            case 0:
+                _projectileAbility = new DefaultProjectileAbility(_damage);
+                break;
+            case 1:
+                _projectileAbility = new FireProjectileAbility(_projectileAbility);
+                break;
+            case 2:
+                //_projectileAbility = new FreezeProjectileAbility(_projectileAbility);
+                break;
+        }
+    }
+    public void Move()
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
@@ -23,14 +44,23 @@ public class Player : Entity
         transform.Translate(new Vector2(horizontal, vertical) * (_moveSpeed * Time.deltaTime));
     }
     
-    public override void Attack()
+    public void Attack()
     {
-        Instantiate(projectile, transform.position, Quaternion.identity);
-        GameManager.Instance.ShootArrow();
+        Projectile newProjectile = Instantiate(projectile, transform.position, Quaternion.identity);
+        newProjectile.SetDecorator(_projectileAbility);
+        AudioManager.Instance.PlayClip("PlayerShootArrow");
     }
     
     public void HandleInput()
     {
+        if (Input.GetKeyDown("1"))
+        {
+            SetDecorator(0);
+        }
+        if (Input.GetKeyDown("2"))
+        {
+            SetDecorator(1);
+        }
         timer += Time.deltaTime;
         if (Input.GetMouseButton(0))
         {
@@ -41,12 +71,12 @@ public class Player : Entity
         }
     }
     
-    public override void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         throw new System.NotImplementedException();
     }
     
-    public override void Die()
+    public void Die()
     {
         throw new System.NotImplementedException();
     }

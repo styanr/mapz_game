@@ -2,25 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : Singleton<AudioManager>
 {
    private AudioSource _audioSource;
-   public void Awake()
+   private SoundRepository _soundRepository;
+   public void Start()
    {
       _audioSource = GetComponent<AudioSource>();
+      _soundRepository = GetComponent<SoundRepository>();
    }
    
-   public void PlayOneShot(AudioClip clip)
+   public void PlayClip(string clipName)
    {
+      var clip = _soundRepository.GetSound(clipName);
       if (clip != null)
       {
          _audioSource.PlayOneShot(clip);
       }
    }
-   
-   public void SetVolume(float volume)
-   {
-      _audioSource.volume = volume;
-   }
-   
 }

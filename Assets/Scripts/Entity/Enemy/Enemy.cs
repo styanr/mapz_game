@@ -3,8 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy : Entity
+public abstract class Enemy : MonoBehaviour, IEntity
 {
+    protected float _moveSpeed;
+    protected int _health;
+    protected int _damage;
+    
     protected Transform player;
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rigidbody2D;
@@ -15,49 +19,53 @@ public abstract class Enemy : Entity
         _rigidbody2D.angularDrag = 5f;
         
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        player = PlayerSingleton.Instance.transform;
+        player = Player.Instance.transform;
     }
-
+    public void SetOnFire()
+    {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.color = Color.red;
+    }
     protected virtual void Update()
     {
         Move();
         Flip();
     }
-
-    public override void Move()
+    // use movement strategy pattern
+    public virtual void Move()
     {
         transform.position = Vector2
             .MoveTowards(transform.position, player.position, _moveSpeed * Time.deltaTime);
     }
     
-    public override void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         _health -= damage;
         if (_health <= 0)
         {
             Die();
-            GameManager.Instance.EnemyDeath();
+            AudioManager.Instance.PlayClip("EnemyDeath");
         }
         else
         {
-            GameManager.Instance.Hit();
+            AudioManager.Instance.PlayClip("EnemyHit");
         }
     }
 
-    public override void Die()
+    public void Die()
     {
         Destroy(gameObject);
     }
 
     protected virtual void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject == PlayerSingleton.Instance.gameObject)
+        if (collision.gameObject == Player.Instance.gameObject)
         {
             Attack();
         }
     }
 
-    public override void Attack()
+    public virtual void Attack()
     {
         Debug.Log("Attack");
     }
