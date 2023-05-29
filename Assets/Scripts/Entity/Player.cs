@@ -20,7 +20,10 @@ public class Player : Singleton<Player>, IEntity
         _damage = 15;     
         SetDecorator(0);
     }
-
+    public Vector3 GetPosition()
+    {
+        return transform.position;
+    }
     public void SetDecorator(int ability)
     {
         switch (ability)
@@ -48,7 +51,7 @@ public class Player : Singleton<Player>, IEntity
     {
         Projectile newProjectile = Instantiate(projectile, transform.position, Quaternion.identity);
         newProjectile.SetDecorator(_projectileAbility);
-        AudioManager.Instance.PlayClip("PlayerShootArrow");
+        AudioManager.Instance.PlaySoundEffect("PlayerShootArrow");
     }
     
     public void HandleInput()

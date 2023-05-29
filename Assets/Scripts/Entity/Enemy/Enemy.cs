@@ -9,7 +9,7 @@ public abstract class Enemy : MonoBehaviour, IEntity
     protected int _health;
     protected int _damage;
     
-    protected Transform player;
+    protected Player player;
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rigidbody2D;
     private void Start()
@@ -19,7 +19,7 @@ public abstract class Enemy : MonoBehaviour, IEntity
         _rigidbody2D.angularDrag = 5f;
         
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        player = Player.Instance.transform;
+        player = Player.Instance;
     }
     public void SetOnFire()
     {
@@ -35,7 +35,7 @@ public abstract class Enemy : MonoBehaviour, IEntity
     public virtual void Move()
     {
         transform.position = Vector2
-            .MoveTowards(transform.position, player.position, _moveSpeed * Time.deltaTime);
+            .MoveTowards(transform.position, player.GetPosition(), _moveSpeed * Time.deltaTime);
     }
     
     public void TakeDamage(int damage)
@@ -44,11 +44,11 @@ public abstract class Enemy : MonoBehaviour, IEntity
         if (_health <= 0)
         {
             Die();
-            AudioManager.Instance.PlayClip("EnemyDeath");
+            AudioManager.Instance.PlaySoundEffect("EnemyDeath");
         }
         else
         {
-            AudioManager.Instance.PlayClip("EnemyHit");
+            AudioManager.Instance.PlaySoundEffect("EnemyHit");
         }
     }
 
@@ -71,11 +71,11 @@ public abstract class Enemy : MonoBehaviour, IEntity
     }
     private void Flip()
     {
-        if (transform.position.x > player.position.x)
+        if (transform.position.x > player.GetPosition().x)
         {
             _spriteRenderer.flipX = true;
         }
-        else if (transform.position.x < player.position.x)
+        else if (transform.position.x < player.GetPosition().x)
         {
             _spriteRenderer.flipX = false;
         }

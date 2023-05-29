@@ -10,6 +10,7 @@ public abstract class Singleton<T> : MonoBehaviour
         if (Instance == null)
         {
             Instance = GetComponent<T>();
+            DontDestroyOnLoad(gameObject);
         }
         else
         {

@@ -18,15 +18,15 @@ public class SkellyMage : Enemy
     }
     public override void Move()
     {
-        var distance = Vector2.Distance(transform.position, player.position);
+        var distance = Vector2.Distance(transform.position, player.GetPosition());
         if (distance > _safeRadius)
         {
-            Vector2 directionToPlayer = (player.position - transform.position).normalized;
+            Vector2 directionToPlayer = (player.GetPosition() - transform.position).normalized;
             transform.Translate(directionToPlayer.normalized * _moveSpeed * Time.deltaTime);
         }
         else if (distance <= _safeRadius)
         {
-            Vector2 directionFromPlayer = (transform.position - player.position).normalized;
+            Vector2 directionFromPlayer = (transform.position - player.GetPosition()).normalized;
             transform.Translate(directionFromPlayer * _moveSpeed * Time.deltaTime);
         }
     }
