@@ -3,6 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+enum DebuffType
+{
+    None,
+    Fire,
+    Freeze
+}
 public abstract class Enemy : MonoBehaviour, IEntity
 {
     protected float _moveSpeedMultiplier = 1f;
@@ -13,7 +19,10 @@ public abstract class Enemy : MonoBehaviour, IEntity
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rigidbody2D;
     private SpriteRenderer spriteRenderer;
+    private IEnemyMovementStrategy _movementStrategy;
     
+    private float _debuffTimer = 0f;
+    private DebuffType _debuffType = DebuffType.None;
     public void SetEnemyData(EnemyData enemyData)
     {
         _enemyData = enemyData;
@@ -22,7 +31,8 @@ public abstract class Enemy : MonoBehaviour, IEntity
     private void Start()
     {
          spriteRenderer = GetComponent<SpriteRenderer>();
-        
+        _movementStrategy = new DefaultMovementStrategy();
+         
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _rigidbody2D.drag = 5f;
         _rigidbody2D.angularDrag = 5f;
@@ -33,24 +43,54 @@ public abstract class Enemy : MonoBehaviour, IEntity
     public void SetOnFire()
     {
         spriteRenderer.color = Color.red;
+        _movementStrategy = new FrenzyMovementStrategy();
+        _moveSpeedMultiplier = 5f;
+        
+        if(_debuffType == DebuffType.Fire)
+            _debuffTimer += 5f;
+        else
+            _debuffTimer = 5f;
+        
+        _debuffType = DebuffType.Fire;
     }
-
+    
+    public void CheckDebuffTimer()
+    {
+        if (_debuffTimer > 0f)
+        {
+            _debuffTimer -= Time.deltaTime;
+        }
+        else
+        {
+            _debuffTimer = 0f;
+            _movementStrategy = new DefaultMovementStrategy();
+            _moveSpeedMultiplier = 1f;
+            spriteRenderer.color = Color.white;
+        }
+    } 
     public void Freeze()
     {
+        _debuffTimer += 5f;
         spriteRenderer.color = Color.blue;
         _moveSpeedMultiplier = 0.1f;
+        
+        if(_debuffType == DebuffType.Freeze)
+            _debuffTimer += 5f;
+        else
+            _debuffTimer = 5f;
+        
+        _debuffType = DebuffType.Freeze;
     }
     protected virtual void Update()
     {
         Move();
         Flip();
+        CheckDebuffTimer();
     }
     // use movement strategy pattern
     public virtual void Move()
     {
-        transform.position = Vector2
-            .MoveTowards(transform.position, player.GetPosition(), 
-                _enemyData.MoveSpeed * _moveSpeedMultiplier * Time.deltaTime);
+        _movementStrategy.Move(transform, _enemyData.MoveSpeed, _moveSpeedMultiplier);
     }
     
     public void TakeDamage(int damage)

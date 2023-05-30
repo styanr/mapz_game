@@ -13,7 +13,6 @@ public class OrcWarrior : Enemy
     protected override void Update()
     {
         _moveSpeedMultiplier = Math.Clamp((_enemyData.MaxHealth / _health), 1f, 5f);
-        Debug.Log(_moveSpeedMultiplier.ToString());
         base.Update();
     }
 }

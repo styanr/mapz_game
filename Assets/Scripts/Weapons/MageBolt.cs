@@ -8,7 +8,7 @@ public class MageBolt : Projectile
     // Start is called before the first frame update
     void Start()
     {
-        _moveSpeed = 20f;
+        _moveSpeed = 30f;
     }
 
     private GameObject FindNearestSkelly()
