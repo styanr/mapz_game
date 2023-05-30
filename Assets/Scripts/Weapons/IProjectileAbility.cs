@@ -44,3 +44,15 @@ public class FireProjectileAbility : ProjectileAbilityDecorator
     }
 }
 
+public class FreezeProjectileAbility : ProjectileAbilityDecorator
+{
+    public FreezeProjectileAbility(IProjectileAbility projectileAbility) : base(projectileAbility)
+    {
+    }
+    public override void Hit(Enemy enemy)
+    {
+        _projectileAbility.Hit(enemy);
+        enemy.Freeze();
+    }
+}
+

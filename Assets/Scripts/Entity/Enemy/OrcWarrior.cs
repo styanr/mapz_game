@@ -1,14 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class OrcWarrior : Enemy
 {
-    // Start is called before the first frame update
     private void Awake()
     {
-        _moveSpeed = 2;
-        _health = 45;
-        _damage = 10; 
+        SetEnemyData(EnemyTypeFactory.GetEnemyData(2f, 100, 10));
+    }
+    
+    protected override void Update()
+    {
+        _moveSpeedMultiplier = Math.Clamp((_enemyData.MaxHealth / _health), 1f, 5f);
+        Debug.Log(_moveSpeedMultiplier.ToString());
+        base.Update();
     }
 }

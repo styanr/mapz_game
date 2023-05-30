@@ -12,9 +12,7 @@ public class SkellyMage : Enemy
     private float _timer = 0f;
     private void Awake()
     {
-        _moveSpeed = 7;
-        _health = 15;
-        _damage = 2;
+        SetEnemyData(EnemyTypeFactory.GetEnemyData(7f, 15, 2));
     }
     public override void Move()
     {
@@ -22,12 +20,12 @@ public class SkellyMage : Enemy
         if (distance > _safeRadius)
         {
             Vector2 directionToPlayer = (player.GetPosition() - transform.position).normalized;
-            transform.Translate(directionToPlayer.normalized * _moveSpeed * Time.deltaTime);
+            transform.Translate(directionToPlayer.normalized * (_enemyData.MoveSpeed * Time.deltaTime));
         }
         else if (distance <= _safeRadius)
         {
             Vector2 directionFromPlayer = (transform.position - player.GetPosition()).normalized;
-            transform.Translate(directionFromPlayer * _moveSpeed * Time.deltaTime);
+            transform.Translate(directionFromPlayer * (_enemyData.MoveSpeed * Time.deltaTime));
         }
     }
     

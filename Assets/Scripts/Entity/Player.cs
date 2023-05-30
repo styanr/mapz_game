@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Player : Singleton<Player>, IEntity
 {
@@ -30,12 +31,15 @@ public class Player : Singleton<Player>, IEntity
         {
             case 0:
                 _projectileAbility = new DefaultProjectileAbility(_damage);
+                Debug.Log("Default");
                 break;
             case 1:
-                _projectileAbility = new FireProjectileAbility(_projectileAbility);
+                _projectileAbility = new FireProjectileAbility(new DefaultProjectileAbility(_damage));
+                Debug.Log("Fire");
                 break;
             case 2:
-                //_projectileAbility = new FreezeProjectileAbility(_projectileAbility);
+                _projectileAbility = new FreezeProjectileAbility(new DefaultProjectileAbility(_damage));
+                Debug.Log("Freeze");
                 break;
         }
     }
@@ -56,22 +60,28 @@ public class Player : Singleton<Player>, IEntity
     
     public void HandleInput()
     {
-        if (Input.GetKeyDown("1"))
-        {
-            SetDecorator(0);
-        }
-        if (Input.GetKeyDown("2"))
-        {
-            SetDecorator(1);
-        }
         timer += Time.deltaTime;
-        if (Input.GetMouseButton(0))
+        
+        if (Input.anyKeyDown && !(Input.GetMouseButtonDown(0) 
+                                  || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2)))
         {
-            if(timer >= _fireRate) {
-                Attack();
-                timer = 0;
+            var inputKey = Input.inputString[0];
+            if (char.IsDigit(inputKey))
+            {
+                SetDecorator(int.TryParse(inputKey.ToString(), out var ability) ? ability : 0);
             }
         }
+        else
+        {
+            if (Input.GetMouseButton(0))
+            {
+                if(timer >= _fireRate) {
+                    Attack();
+                    timer = 0;
+                }
+            }    
+        }
+        
     }
     
     public void TakeDamage(int damage)

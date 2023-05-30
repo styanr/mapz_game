@@ -5,15 +5,24 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour, IEntity
 {
-    protected float _moveSpeed;
+    protected float _moveSpeedMultiplier = 1f;
+    protected EnemyData _enemyData;
     protected int _health;
-    protected int _damage;
     
     protected Player player;
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rigidbody2D;
+    private SpriteRenderer spriteRenderer;
+    
+    public void SetEnemyData(EnemyData enemyData)
+    {
+        _enemyData = enemyData;
+        _health = enemyData.MaxHealth;
+    }
     private void Start()
     {
+         spriteRenderer = GetComponent<SpriteRenderer>();
+        
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _rigidbody2D.drag = 5f;
         _rigidbody2D.angularDrag = 5f;
@@ -23,8 +32,13 @@ public abstract class Enemy : MonoBehaviour, IEntity
     }
     public void SetOnFire()
     {
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.color = Color.red;
+    }
+
+    public void Freeze()
+    {
+        spriteRenderer.color = Color.blue;
+        _moveSpeedMultiplier = 0.1f;
     }
     protected virtual void Update()
     {
@@ -35,7 +49,8 @@ public abstract class Enemy : MonoBehaviour, IEntity
     public virtual void Move()
     {
         transform.position = Vector2
-            .MoveTowards(transform.position, player.GetPosition(), _moveSpeed * Time.deltaTime);
+            .MoveTowards(transform.position, player.GetPosition(), 
+                _enemyData.MoveSpeed * _moveSpeedMultiplier * Time.deltaTime);
     }
     
     public void TakeDamage(int damage)
@@ -67,7 +82,7 @@ public abstract class Enemy : MonoBehaviour, IEntity
 
     public virtual void Attack()
     {
-        Debug.Log("Attack");
+        //Debug.Log("Attack");
     }
     private void Flip()
     {

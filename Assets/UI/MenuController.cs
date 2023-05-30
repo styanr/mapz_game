@@ -31,18 +31,21 @@ public class MenuController : MonoBehaviour
     private void Start()
     {
         AudioManager.Instance.SetVolume(0.1f);
-        AudioManager.Instance.PlayMusic("undertale");
+        AudioManager.Instance.PlayMusic("MainMenu");
     }
     
     public void OnPlayButtonClicked()
     {
+        AudioManager.Instance.Pause();
         SceneManager.LoadScene("Game");
+        AudioManager.Instance.PlayMusic("undertale");
     }
     
     public void OnOptionsButtonClicked()
     {
         _uiDocument.rootVisualElement.Q<VisualElement>("MainMenuButtons").style.display = DisplayStyle.None;
         _uiDocument.rootVisualElement.Q<VisualElement>("OptionsMenuButtons").style.display = DisplayStyle.Flex;
+        _volumeSlider.value = AudioManager.Instance.GetVolume();
     }
 
     public void OnSaveButtonClicked()
@@ -54,6 +57,7 @@ public class MenuController : MonoBehaviour
     }
     public void OnQuitButtonClicked()
     {
+        Debug.Log("Quit");
         Application.Quit();
     }
     

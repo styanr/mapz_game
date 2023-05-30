@@ -6,9 +6,7 @@ public class Skelly : Enemy, ICloneable<Skelly>
 {
     private void Awake()
     {
-        _moveSpeed = 4;
-        _health = 15;
-        _damage = 3; 
+        SetEnemyData(EnemyTypeFactory.GetEnemyData(4f, 15, 3));
     }
     
     public Skelly Clone()

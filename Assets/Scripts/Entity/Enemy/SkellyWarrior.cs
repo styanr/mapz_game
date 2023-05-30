@@ -7,8 +7,6 @@ public class SkellyWarrior : Enemy
     // Start is called before the first frame update
     private void Awake()
     {
-        _moveSpeed = 3;
-        _health = 60;
-        _damage = 7; 
+        SetEnemyData(EnemyTypeFactory.GetEnemyData(3f, 60, 7));
     }
 }

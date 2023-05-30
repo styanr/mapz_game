@@ -168,7 +168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a665958a863d7044fadaa08a986e4796, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _circleSpeed: 1
-  _safeRadius: 7
+  _safeRadius: 10
   _projectile: {fileID: 1780998699793130760, guid: 08b5c9a47f237a8469ad6e17885cc21a, type: 3}
-  _fireRate: 5
+  _fireRate: 1

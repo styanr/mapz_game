@@ -5,10 +5,8 @@ using UnityEngine;
 public class Orc : Enemy
 {
     // Start is called before the first frame update
-    private void Awake()
+    protected void Awake()
     {
-        _moveSpeed = 4;
-        _health = 30;
-        _damage = 5; 
+        SetEnemyData(EnemyTypeFactory.GetEnemyData(4f, 30, 5));
     }
 }
