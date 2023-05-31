@@ -12,7 +12,7 @@ public abstract class Projectile : MonoBehaviour
     protected float _lifetime = 3f;
     private float _timer = 0f;
     protected float _moveSpeed;
-    private IProjectileAbility _ability;
+    protected IProjectileAbility _ability;
 
     public void SetDecorator(IProjectileAbility ability)
     {
@@ -83,6 +83,7 @@ public abstract class Projectile : MonoBehaviour
         var hits = Physics2D.LinecastAll(startPosition, endPosition);
         foreach (var hit in hits)
         {
+            Debug.Log(hit.collider.gameObject);
             if (ShouldHitObject(hit.collider))
             {
                 OnHit(hit.collider);

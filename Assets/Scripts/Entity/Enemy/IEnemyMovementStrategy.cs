@@ -41,3 +41,29 @@ public class FrenzyMovementStrategy : IEnemyMovementStrategy
                 moveSpeed * moveSpeedMultiplier * Time.deltaTime);
     }
 }
+
+public class IdleMovementStrategy : IEnemyMovementStrategy
+{
+    public void Move(Transform enemyTransform, float moveSpeed, float moveSpeedMultiplier)
+    {
+    }
+}
+
+public class AvoidPlayerMovementStrategy : IEnemyMovementStrategy
+{
+    private readonly float _safeRadius = 10f;
+    public void Move(Transform enemyTransform, float moveSpeed, float moveSpeedMultiplier)
+    {
+        var distance = Vector2.Distance(enemyTransform.position, Player.Instance.GetPosition());
+        if (distance > _safeRadius)
+        {
+            Vector2 directionToPlayer = (Player.Instance.GetPosition() - enemyTransform.position).normalized;
+            enemyTransform.Translate(directionToPlayer.normalized * (moveSpeed * Time.deltaTime));
+        }
+        else if (distance <= _safeRadius)
+        {
+            Vector2 directionFromPlayer = (enemyTransform.position - Player.Instance.GetPosition()).normalized;
+            enemyTransform.Translate(directionFromPlayer * (moveSpeed * Time.deltaTime));
+        }
+    }
+}

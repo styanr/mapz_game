@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ using System.Linq;
 public class Player : Singleton<Player>, IEntity
 {
     protected float _moveSpeed;
+    public float MoveSpeed => _moveSpeed;
+    
     protected int _health;
     protected int _damage;
     private IProjectileAbility _projectileAbility;
@@ -86,7 +89,7 @@ public class Player : Singleton<Player>, IEntity
     
     public void TakeDamage(int damage)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Ouch!");
     }
     
     public void Die()
@@ -98,5 +101,15 @@ public class Player : Singleton<Player>, IEntity
     void Update()
     {
         HandleInput();
+    }
+    
+    public void Freeze()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void SetOnFire()
+    {
+        throw new System.NotImplementedException();
     }
 }

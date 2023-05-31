@@ -20,7 +20,7 @@ public abstract class Enemy : MonoBehaviour, IEntity
     private Rigidbody2D _rigidbody2D;
     private SpriteRenderer spriteRenderer;
     private IEnemyMovementStrategy _movementStrategy;
-    
+
     private float _debuffTimer = 0f;
     private DebuffType _debuffType = DebuffType.None;
     public void SetEnemyData(EnemyData enemyData)
@@ -63,7 +63,7 @@ public abstract class Enemy : MonoBehaviour, IEntity
         else
         {
             _debuffTimer = 0f;
-            _movementStrategy = new DefaultMovementStrategy();
+            _movementStrategy = _enemyData.MovementStrategy;
             _moveSpeedMultiplier = 1f;
             spriteRenderer.color = Color.white;
         }
@@ -71,8 +71,8 @@ public abstract class Enemy : MonoBehaviour, IEntity
     public void Freeze()
     {
         _debuffTimer += 5f;
+        _movementStrategy = new IdleMovementStrategy();
         spriteRenderer.color = Color.blue;
-        _moveSpeedMultiplier = 0.1f;
         
         if(_debuffType == DebuffType.Freeze)
             _debuffTimer += 5f;
@@ -93,7 +93,7 @@ public abstract class Enemy : MonoBehaviour, IEntity
         _movementStrategy.Move(transform, _enemyData.MoveSpeed, _moveSpeedMultiplier);
     }
     
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         _health -= damage;
         if (_health <= 0)
@@ -124,7 +124,7 @@ public abstract class Enemy : MonoBehaviour, IEntity
     {
         //Debug.Log("Attack");
     }
-    private void Flip()
+    protected void Flip()
     {
         if (transform.position.x > player.GetPosition().x)
         {

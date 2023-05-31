@@ -8,6 +8,7 @@ public class EnemySpawnerEditor : Editor
     private SerializedProperty _spawnDelayProperty;
     private SerializedProperty _spawnTimerProperty;
     private SerializedProperty _enemySpawnChancesProperty;
+    private SerializedProperty _bossProperty;
 
     private void OnEnable()
     {
@@ -15,6 +16,7 @@ public class EnemySpawnerEditor : Editor
         _spawnDelayProperty = serializedObject.FindProperty("_spawnDelay");
         _spawnTimerProperty = serializedObject.FindProperty("_spawnTimer");
         _enemySpawnChancesProperty = serializedObject.FindProperty("_enemySpawnChances");
+        _bossProperty = serializedObject.FindProperty("_boss");
     }
 
     public override void OnInspectorGUI()
@@ -24,6 +26,7 @@ public class EnemySpawnerEditor : Editor
         EditorGUILayout.PropertyField(_enemyFactoriesProperty, true);
         EditorGUILayout.PropertyField(_spawnDelayProperty);
         EditorGUILayout.PropertyField(_spawnTimerProperty);
+        EditorGUILayout.PropertyField(_bossProperty);
 
         EditorGUILayout.Space();
         EditorGUILayout.LabelField("Spawn Chances");

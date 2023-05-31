@@ -5,7 +5,7 @@ using UnityEngine;
 
 public interface IProjectileAbility
 {
-    public void Hit(Enemy enemy);
+    public void Hit(IEntity entity);
 }
 
 public class DefaultProjectileAbility : IProjectileAbility
@@ -17,9 +17,9 @@ public class DefaultProjectileAbility : IProjectileAbility
         _damage = damage;
     }
 
-    public void Hit(Enemy enemy)
+    public void Hit(IEntity entity)
     {
-        enemy.TakeDamage(_damage);
+        entity.TakeDamage(_damage);
     }
 }
 public abstract class ProjectileAbilityDecorator : IProjectileAbility
@@ -29,7 +29,7 @@ public abstract class ProjectileAbilityDecorator : IProjectileAbility
     {
         _projectileAbility = projectileAbility;
     }
-    public abstract void Hit(Enemy enemy);
+    public abstract void Hit(IEntity entity);
 }
 
 public class FireProjectileAbility : ProjectileAbilityDecorator
@@ -37,10 +37,10 @@ public class FireProjectileAbility : ProjectileAbilityDecorator
     public FireProjectileAbility(IProjectileAbility projectileAbility) : base(projectileAbility)
     {
     }
-    public override void Hit(Enemy enemy)
+    public override void Hit(IEntity entity)
     {
-        _projectileAbility.Hit(enemy);
-        enemy.SetOnFire();
+        _projectileAbility.Hit(entity);
+        entity.SetOnFire();
     }
 }
 
@@ -49,10 +49,10 @@ public class FreezeProjectileAbility : ProjectileAbilityDecorator
     public FreezeProjectileAbility(IProjectileAbility projectileAbility) : base(projectileAbility)
     {
     }
-    public override void Hit(Enemy enemy)
+    public override void Hit(IEntity entity)
     {
-        _projectileAbility.Hit(enemy);
-        enemy.Freeze();
+        _projectileAbility.Hit(entity);
+        entity.Freeze();
     }
 }
 

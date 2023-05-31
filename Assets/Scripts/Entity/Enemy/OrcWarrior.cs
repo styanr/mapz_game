@@ -7,7 +7,7 @@ public class OrcWarrior : Enemy
 {
     private void Awake()
     {
-        SetEnemyData(EnemyTypeFactory.GetEnemyData(2f, 100, 10));
+        SetEnemyData(EnemyTypeFactory.GetEnemyData(2f, 100, 10, new DefaultMovementStrategy()));
     }
     
     protected override void Update()

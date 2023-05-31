@@ -17,6 +17,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float _spawnDelay = 1f;
     [SerializeField] private EnemySpawnChance[] _enemySpawnChances;
     [SerializeField] Timer _spawnTimer;
+    [SerializeField] Boss _boss;
     private Camera _mainCamera;
     
     private void Awake()
@@ -26,6 +27,12 @@ public class EnemySpawner : MonoBehaviour
     }
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.B))
+        {
+            Boss boss = Instantiate(_boss, transform.position, Quaternion.identity);
+            boss.transform.position = GetSpawnPosition();
+            boss.transform.parent = transform;
+        }
         if (_spawnTimer.IsReady())
         {
             var enemyFactory = GetRandomEnemyFactory();

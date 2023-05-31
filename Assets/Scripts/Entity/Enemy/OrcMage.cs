@@ -8,7 +8,7 @@ public class OrcMage : Enemy
     public int _teleportDistance;
     private void Awake()
     {
-        SetEnemyData(EnemyTypeFactory.GetEnemyData(15f, 15, 2));
+        SetEnemyData(EnemyTypeFactory.GetEnemyData(15f, 15, 2, new DefaultMovementStrategy()));
     }
     protected override void OnCollisionStay2D(Collision2D collision)
     {

@@ -8,4 +8,6 @@ public interface IEntity
     public void Attack();
     public void TakeDamage(int damage);
     public void Die();
+    public void Freeze();
+    public void SetOnFire();
 }
